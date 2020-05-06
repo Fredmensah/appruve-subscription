@@ -5,7 +5,26 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-export default function AddressForm() {
+export default function AddressForm(props) {
+    const userFields = props.formData;
+
+    const [formFields , setFormFields] = React.useState({
+        firstName: userFields.firstName,
+        lastName: userFields.lastName,
+        address1: userFields.address1,
+        address2: userFields.address2,
+        city: userFields.city,
+        zip: userFields.zip,
+        country: userFields.country,
+    });
+
+    const handleChange = (event) => {
+        const { ...formData }  = formFields;
+        formData[event.target.name] = event.target.value;
+        setFormFields(formData);
+        props.collectData(event);
+    };
+
     return (
         <React.Fragment>
             <Typography variant="h6" gutterBottom>
@@ -18,6 +37,7 @@ export default function AddressForm() {
                         id="firstName"
                         name="firstName"
                         label="First name"
+                        onChange={handleChange}
                         fullWidth
                         autoComplete="fname"
                     />
@@ -27,6 +47,7 @@ export default function AddressForm() {
                         required
                         id="lastName"
                         name="lastName"
+                        onChange={handleChange}
                         label="Last name"
                         fullWidth
                         autoComplete="lname"
@@ -37,6 +58,7 @@ export default function AddressForm() {
                         required
                         id="address1"
                         name="address1"
+                        onChange={handleChange}
                         label="Address line 1"
                         fullWidth
                         autoComplete="billing address-line1"
@@ -46,6 +68,7 @@ export default function AddressForm() {
                     <TextField
                         id="address2"
                         name="address2"
+                        onChange={handleChange}
                         label="Address line 2"
                         fullWidth
                         autoComplete="billing address-line2"
@@ -57,6 +80,7 @@ export default function AddressForm() {
                         id="city"
                         name="city"
                         label="City"
+                        onChange={handleChange}
                         fullWidth
                         autoComplete="billing address-level2"
                     />
@@ -79,6 +103,7 @@ export default function AddressForm() {
                         required
                         id="country"
                         name="country"
+                        onChange={handleChange}
                         label="Country"
                         fullWidth
                         autoComplete="billing country"

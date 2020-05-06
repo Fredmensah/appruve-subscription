@@ -59,32 +59,65 @@ const useStyles = makeStyles((theme) => ({
     },
     buttons: {
         display: 'flex',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
     },
     button: {
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(1),
+        backgroundColor: '#e51e82',
+        padding: theme.spacing(0.8 , 7),
+    },
+    button1: {
+        marginTop: theme.spacing(3),
+        marginLeft: theme.spacing(1),
+        backgroundColor: '#FFFFFF',
+        color: '#e51e82',
+        border: '0.5px solid #e51e82',
+        padding: theme.spacing(0.8 , 7),
     },
 }));
-
-const steps = ['Customer address', 'Payment details', 'Review your subscription'];
-
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return <AddressForm />;
-        case 1:
-            return <PaymentForm />;
-        case 2:
-            return <Review />;
-        default:
-            throw new Error('Unknown step');
-    }
-}
 
 export default function Checkout() {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
+    const [data , setData] = React.useState({
+        firstName: '',
+        lastName: '',
+        address1: '',
+        address2: '',
+        city: '',
+        zip: '',
+        country: '',
+        cvv: '',
+        cardName: '',
+        cardNumber: '',
+        expDate: '',
+    });
+
+    const steps = ['Customer address', 'Payment details', 'Review your subscription'];
+
+    function getStepContent(step) {
+        switch (step) {
+            case 0:
+                return <AddressForm formData={data} collectData={formDataHandler}/>;
+            case 1:
+                return <PaymentForm formData={data} collectData={formDataHandler}/>;
+            case 2:
+                return <Review formData={data} collectData={formDataHandler}/>;
+            default:
+                throw new Error('Unknown step');
+        }
+    }
+
+    const formDataHandler = event => {
+        const { ...formData }  = data;
+
+        formData[event.target.name] = event.target.value;
+        /*if (event.target.name === 'password') {
+            this.form.isFormValid(false);
+        }*/
+        setData(formData);
+    };
 
     const handleNext = () => {
         setActiveStep(activeStep + 1);
@@ -125,7 +158,7 @@ export default function Checkout() {
                                 {getStepContent(activeStep)}
                                 <div className={classes.buttons}>
                                     {activeStep !== 0 && (
-                                        <Button onClick={handleBack} className={classes.button}>
+                                        <Button onClick={handleBack} className={classes.button1}>
                                             Back
                                         </Button>
                                     )}

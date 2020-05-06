@@ -6,21 +6,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 
-const products = [
-    { name: 'Product 1', desc: 'A nice thing', price: '$9.99' },
-    { name: 'Product 2', desc: 'Another thing', price: '$3.45' },
-    { name: 'Product 3', desc: 'Something else', price: '$6.51' },
-    { name: 'Product 4', desc: 'Best thing of all', price: '$14.11' },
-    { name: 'Shipping', desc: '', price: 'Free' },
-];
-const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-    { name: 'Card type', detail: 'Visa' },
-    { name: 'Card holder', detail: 'Mr John Smith' },
-    { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-    { name: 'Expiry date', detail: '04/2024' },
-];
-
 const useStyles = makeStyles((theme) => ({
     listItem: {
         padding: theme.spacing(1, 0),
@@ -33,25 +18,34 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Review() {
+export default function Review(props) {
+    const userFields = props.formData;
+    const addresses = [userFields.address1 , userFields.address2, userFields.city, userFields.zip, userFields.country];
+    const payments = [
+        { name: 'Card type', detail: userFields.country },
+        { name: 'Card holder', detail: userFields.cardName },
+        { name: 'Card number', detail: userFields.cardNumber },
+        { name: 'Expiry date', detail: userFields.expDate },
+    ];
+
     const classes = useStyles();
+    const subscription = JSON.parse(localStorage.getItem('selectedSubscription'));
 
     return (
         <React.Fragment>
             <Typography variant="h6" gutterBottom>
-                Order summary
+                Package ( { subscription.title } )
             </Typography>
             <List disablePadding>
-                {products.map((product) => (
-                    <ListItem className={classes.listItem} key={product.name}>
-                        <ListItemText primary={product.name} secondary={product.desc} />
-                        <Typography variant="body2">{product.price}</Typography>
+                {subscription.description.map((item , index) => (
+                    <ListItem className={classes.listItem} key={item}>
+                        <ListItemText textAlign={'center'} primary={`${index + 1}. ${item}`} />
                     </ListItem>
                 ))}
                 <ListItem className={classes.listItem}>
                     <ListItemText primary="Total" />
                     <Typography variant="subtitle1" className={classes.total}>
-                        $34.06
+                        {subscription.price}
                     </Typography>
                 </ListItem>
             </List>
@@ -60,7 +54,7 @@ export default function Review() {
                     <Typography variant="h6" gutterBottom className={classes.title}>
                         Shipping
                     </Typography>
-                    <Typography gutterBottom>John Smith</Typography>
+                    <Typography gutterBottom>`${userFields.firstName} ${userFields.lastName}`</Typography>
                     <Typography gutterBottom>{addresses.join(', ')}</Typography>
                 </Grid>
                 <Grid item container direction="column" xs={12} sm={6}>
