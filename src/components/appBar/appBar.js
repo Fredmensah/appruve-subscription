@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     appBar: {
-        borderBottom: `1px solid ${theme.palette.divider}`,
+        //borderBottom: `1px solid ${theme.palette.divider}`,
     },
     toolbar: {
         flexWrap: 'wrap',
@@ -25,6 +25,14 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'left'
     },
     link: {
+        margin: theme.spacing(1, 1.5),
+    },
+    linker: {
+        border: '0.5px solid #e51e82',
+        color: '#e51e82',
+        backgroundColor: '#FFFFFF',
+        fontSize: '12px',
+        padding: theme.spacing(0.8, 4),
         margin: theme.spacing(1, 1.5),
     },
     heroContent: {
@@ -56,7 +64,7 @@ const TopNav = () => {
     const classes = useStyles();
 
     return (
-        <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
+        <AppBar position="static" color="#FFFFFF" elevation={0} className={classes.appBar}>
             <Toolbar className={classes.toolbar}>
                 <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
                     Appruve
@@ -72,7 +80,7 @@ const TopNav = () => {
                         Support
                     </Link>
                 </nav>
-                <Button href="#" color="primary" variant="outlined" className={classes.link}>
+                <Button href="#" className={classes.linker}>
                     Login
                 </Button>
             </Toolbar>
