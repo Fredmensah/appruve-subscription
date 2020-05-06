@@ -10,6 +10,7 @@ import {makeStyles} from "@material-ui/core";
 import StarIcon from '@material-ui/icons/StarBorder';
 import Grid from '@material-ui/core/Grid';
 import paths from "../../../utilities/paths";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     '@global': {
@@ -128,4 +129,4 @@ const SubscriptionSingle = (props) => {
     );
 }
 
-export default SubscriptionSingle;
+export default withRouter(SubscriptionSingle);

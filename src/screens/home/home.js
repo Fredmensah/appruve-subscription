@@ -10,7 +10,6 @@ import SubscriptionSingle from "../../components/subscription/subscriptionSingle
 import Footer from "../../components/footer/footer";
 import Particles from 'react-particles-js';
 
-import image from "../../logo.svg"
 const useStyles = makeStyles((theme) => ({
     '@global': {
         ul: {
