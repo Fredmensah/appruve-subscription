@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
     },
     toolbarTitle: {
         flexGrow: 1,
-        textAlign: 'left'
+        textAlign: 'left',
+        color: '#36b37e'
     },
     link: {
         margin: theme.spacing(1, 1.5),
@@ -66,7 +67,7 @@ const TopNav = () => {
     return (
         <AppBar position="static" color="#FFFFFF" elevation={0} className={classes.appBar}>
             <Toolbar className={classes.toolbar}>
-                <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
+                <Typography variant="h6" color="#36b37e" noWrap className={classes.toolbarTitle}>
                     Appruve
                 </Typography>
                 <nav>

@@ -8,7 +8,9 @@ import Container from '@material-ui/core/Container';
 import TopNav from "../../components/appBar/appBar";
 import SubscriptionSingle from "../../components/subscription/subscriptionSingle/subscriptionSingle";
 import Footer from "../../components/footer/footer";
+import Particles from 'react-particles-js';
 
+import image from "../../logo.svg"
 const useStyles = makeStyles((theme) => ({
     '@global': {
         ul: {
@@ -31,6 +33,10 @@ const useStyles = makeStyles((theme) => ({
     },
     heroContent: {
         padding: theme.spacing(8, 0, 6),
+    },
+    topContent: {
+        padding: theme.spacing(8, 0, 6),
+        backgroundColor: '#d63a88'
     },
     cardHeader: {
         backgroundColor:
@@ -98,6 +104,85 @@ const subscriptions = [
         buttonVariant: 'outlined',
     },
 ];
+const BackGround = ({ children }) => (
+    <>
+        <Particles
+            params={{
+                "particles": {
+                    "number": {
+                        "value": 160,
+                        "density": {
+                            "enable": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "speed": 4,
+                            "size_min": 0.3
+                        }
+                    },
+                    "line_linked": {
+                        "enable": false
+                    },
+                    "move": {
+                        "random": true,
+                        "speed": 1,
+                        "direction": "top",
+                        "out_mode": "out"
+                    }
+                },
+                "interactivity": {
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "bubble"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "repulse"
+                        }
+                    },
+                    "modes": {
+                        "bubble": {
+                            "distance": 250,
+                            "duration": 2,
+                            "size": 0,
+                            "opacity": 0
+                        },
+                        "repulse": {
+                            "distance": 400,
+                            "duration": 4
+                        }
+                    }
+                }
+            }}
+            /*params={{
+                "particles": {
+                    "number": {
+                        "value": 50
+                    },
+                    "size": {
+                        "value": 3
+                    }
+                },
+                "interactivity": {
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "repulse"
+                        }
+                    }
+                }
+            }}*/
+            style={{
+                width: '100%',
+            }}
+        />
+        {children}
+    </>
+);
 
 const Home = (props) => {
     const classes = useStyles();
@@ -108,7 +193,13 @@ const Home = (props) => {
             <CssBaseline />
 
             <TopNav/>
-
+            <Container maxWidth="xl" component="main" className={classes.topContent}>
+                <BackGround>
+                {/*<Typography component="h1" variant="h2" align="center" color="#FFFFFF">
+                    Tools to connect Africans to opportunities all over the world
+                </Typography>*/}
+                </BackGround>
+            </Container>
             {/* INtroduction UNit */}
             <Container maxWidth="sm" component="main" className={classes.heroContent}>
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>

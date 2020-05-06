@@ -2,7 +2,6 @@ import React from "react";
 import "./App.scss";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
-
 import {
     BrowserRouter as Router,
     Switch,
