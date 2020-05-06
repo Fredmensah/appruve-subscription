@@ -42,6 +42,16 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'baseline',
         marginBottom: theme.spacing(2),
     },
+    mainHeading: {
+        fontSize: '20px',
+        fontWeight: '500',
+        color: '#535353'
+    },
+    secondaryHeading: {
+        fontSize: '18px',
+        fontWeight: '300',
+        color: '#272727'
+    },
     footer: {
         borderTop: `1px solid ${theme.palette.divider}`,
         marginTop: theme.spacing(8),
@@ -104,8 +114,10 @@ const Home = (props) => {
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                     Pricing
                 </Typography>
-                <Typography variant="h5" align="center" color="textSecondary" component="p">
+                <Typography variant="h5" align="center" color="textSecondary" component="p" className={classes.mainHeading}>
                     Simple Pricing, no surprises.
+                </Typography>
+                <Typography variant="h5" align="center" color="textSecondary" component="p" className={classes.secondaryHeading}>
                     Start with a 14 days free trial. Upgrade or dwongrade anytime
                 </Typography>
             </Container>

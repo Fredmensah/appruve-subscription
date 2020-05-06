@@ -35,14 +35,17 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(8, 0, 6),
     },
     cardHeader: {
-        backgroundColor:
-            theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[700],
+        textTransform: 'uppercase',
+        fontSize: '16px',
+        backgroundColor: '#FFFFFF',
+        borderBottom: '1px solid #e5e5e552'
     },
     cardPricing: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'baseline',
         marginBottom: theme.spacing(2),
+        color: '#e51e82'
     },
     footer: {
         borderTop: `1px solid ${theme.palette.divider}`,
@@ -54,6 +57,23 @@ const useStyles = makeStyles((theme) => ({
             paddingBottom: theme.spacing(6),
         },
     },
+    outlined: {
+        border: '0.5px solid #e51e82',
+        color: '#e51e82',
+        backgroundColor: '#FFFFFF',
+        fontSize: '14px',
+        width: '200px',
+        margin: '0 auto'
+    },
+    contained: {
+        border: '0.5px solid #e51e82',
+        color: '#FFFFFF',
+        backgroundColor: '#e51e82',
+        fontSize: '14px',
+        width: '200px',
+        textAlign: 'center',
+        margin: '0 auto'
+    }
 }));
 
 const SubscriptionSingle = (props) => {
@@ -68,27 +88,27 @@ const SubscriptionSingle = (props) => {
 
     return (
         <Grid item key={subscription.title} xs={12} sm={subscription.title === 'Enterprise' ? 12 : 6} md={4}>
-            <Card>
+            <Card className={subscription.title === 'Pro' ? 'shadow2' : 'shadow1'}>
                 <CardHeader
                     title={subscription.title}
                     subheader={subscription.subheader}
-                    titleTypographyProps={{ align: 'center' }}
-                    subheaderTypographyProps={{ align: 'center' }}
-                    action={subscription.title === 'Pro' ? <StarIcon /> : null}
+                    titleTypographyProps={{ align: 'center' , textTransform: 'uppercase' , fontSize: '16px' }}
+                    subheaderTypographyProps={{ align: 'center' , fontSize: '16px'}}
+                    action={subscription.title === 'Pro' ? <StarIcon style={{color:'#e51e82'}} /> : null}
                     className={classes.cardHeader}
                 />
                 <CardContent>
                     <div className={classes.cardPricing}>
-                        <Typography component="h2" variant="h3" color="textPrimary">
+                        <Typography component="h2" variant="h4">
                             ${subscription.price}
                         </Typography>
-                        <Typography variant="h6" color="textSecondary">
+                        <Typography variant="h6">
                             /mo
                         </Typography>
                     </div>
                     <ul>
-                        {subscription.description.map((line) => (
-                            <Typography component="li" variant="subtitle1" align="center" key={line}>
+                        {subscription.description.map((line, index) => (
+                            <Typography style={{fontSize: '14px'}} component="li" variant="subtitle1" align="center" key={index}>
                                 {line}
                             </Typography>
                         ))}
@@ -97,8 +117,7 @@ const SubscriptionSingle = (props) => {
                 <CardActions>
                     <Button
                         fullWidth
-                        variant={subscription.buttonVariant}
-                        color="primary"
+                        className={classes[subscription.buttonVariant]}
                         onClick={(event) => addSubscription(event , subscription)}
                     >
                         {subscription.buttonText}
